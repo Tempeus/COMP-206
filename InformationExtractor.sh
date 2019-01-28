@@ -8,7 +8,7 @@
 clear
 
 #change directory to home directory
-cd ~
+cd $Home
 
 #verifies whether a subdirectory called #1 exists, if it does not exist it will create the directory
 File=$1
