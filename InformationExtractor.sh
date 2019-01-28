@@ -1,4 +1,4 @@
-#! bin/bash
+#!/bin/bash
 
 #This script will be used to automate the process of earching and filtering information then logging it to a log file
 
@@ -41,20 +41,20 @@ else
 fi
 
 #Changing the security of the Information file
-chmod 540 Information
+chmod 640 Information
 
 #Writting into the log
 echo "Access right changed for Information file" >> extractor.log
 
 #Appending users into Information file
-Users=who|grep"[a-d]"
-Num=who|grep -c "[a-d]"
+Users= who -q | grep "[a-d]"
+Num= who | grep -c "[a-d]"
 
 #Notifying the change log
-
+echo "List of user names has been added to the Information file" >> extractor.log
 
 #Notifying number of found users into log file
-
+echo "The number of found users is: $Num" >> extractor.log
 
 #Termination of script
 echo "Execution of InformationExtractor script has ended successfully!"
