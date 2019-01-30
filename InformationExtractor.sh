@@ -7,10 +7,10 @@
 #Clearing the screen
 clear
 
-#change directory to home directory
+#Change directory to home directory
 cd $Home
 
-#verifies whether a subdirectory called #1 exists, if it does not exist it will create the directory
+#Verifies whether a subdirectory called #1 exists, if it does not exist it will create the directory
 
 if [ ! -d ./$1 ]
 then
@@ -28,7 +28,7 @@ then
 	touch extractor.log
 fi
 
-#verify if file called information exists, it not, it will create the file
+#Verify if file called information exists, it not, it will create the file
 if [ -f Information ]
 then
 	echo "Information file already exists"
