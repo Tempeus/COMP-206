@@ -15,8 +15,6 @@ cd $Home
 if [ ! -d ./$1 ]
 then
 	mkdir $1
-else
-	echo "$1 already exists"
 fi
 
 #Moving into $1
@@ -28,7 +26,7 @@ then
 	touch extractor.log
 fi
 
-#Verify if file called information exists, it not, it will create the file
+#verify if file called information exists, it not, it will create the file
 if [ -f Information ]
 then
 	echo "Information file already exists"
@@ -50,8 +48,7 @@ who | grep [a-d] | awk '{print $1}' >> Information
 echo "List of user names has been added to the Information file" >> extractor.log
 
 #Notifying number of found users into log file
-echo "The number of found users is: " >> extractor.log
-who | grep -c [a-d] >> extractor.log
+echo "The number of found users is: $(who | grep -c [a-d])" >> extractor.log
 
 #Termination of script
 echo "Execution of InformationExtractor script has ended successfully!"
