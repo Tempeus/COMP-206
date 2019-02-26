@@ -79,20 +79,13 @@ void printMatrix(int matrix[rows][cols]){
 }
 
 void transposeMatrix(int matrix[rows][cols]){
-	int temp[rows][cols];
 
 	//make a temporary copy of the matrix in order to tranpose the original one
 	for(int i = 0; i < rows; i++){
 		for(int k = 0; k < cols; k++){
-			temp[i][k] = matrix[i][k];
-		}
-	}
-
-	//Tranpose the matrix
-	
-	for(int i = 0; i < rows; i++){
-		for(int k = 0; k < cols; k++){
-			matrix[i][k] = temp[k][i];
+			int temp = *( *(matrix + i) + k);
+			*( *(matrix + i) + k) = *( *(matrix + k) + i);
+			*( *(matrix + k) + i) = temp;
 		}
 	}
 }
@@ -102,7 +95,7 @@ void multiplyMatrix(int m1[2][cols], int m2[rows][cols], int resultMatrix[rows][
 	//making sure all the values in the matrix is 0
 	for (int i = 0; i < rows; i++){
 		for (int k = 0; k < cols; k++){
-			resultMatrix[i][k] = 0;
+			*( *(resultMatrix + i) + k) = 0;
 		}
 	}
 
@@ -113,15 +106,10 @@ void multiplyMatrix(int m1[2][cols], int m2[rows][cols], int resultMatrix[rows][
 		sum = 0;
 		for(int k = 0; k < cols; k++){
 			for (int j = 0; j < rows; j++){
-				sum += m1[i][j] * m2[j][k];
+				sum += *( *(m1 + i) +j) * *( *(m2 + j) + k);
 			}
-			resultMatrix[i][k] = sum;
+			*( *(resultMatrix + i) + k) = sum;
 			sum = 0;
 		}
 	}
 }
-
-
-//Things to do: 
-//Must fix the multiplyMatrix and make the last few rows print 0
-//convert transposeMatrix and printMatrix into pointer notation
