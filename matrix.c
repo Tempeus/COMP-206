@@ -9,10 +9,10 @@
 void fillMatrix(int matrix[rows][cols]);
 
 //This function takes a 5x5 matrix as parameter and print each row of the matrix to the screen line by line.
-void printmatrix(int matrix[rows][cols]);
+void printMatrix(int matrix[rows][cols]);
 
 //This function takes a x5 matrix as parameter and transpose it
-void transposematrix(int matrix[rows][cols]);
+void transposeMatrix(int matrix[rows][cols]);
 
 //This function takes 3 matrices as parameters and will calculate the product of the first two matrices and place the result into the third one.
 void multiplyMatrix(int m1[2][cols], int m2[rows][cols], int resultMatrix[rows][cols]);
@@ -25,12 +25,14 @@ int main(){
 	fillMatrix(matrix);
 	
 	//print the matrix to the screen
+	printf("The randomly generated matrix is:\n");
 	printMatrix(matrix);
 
 	//transpose the matrix
 	transposeMatrix(matrix);
 
 	//print the new matrix to the screen
+	printf("\n The tranposed version of the matrix is:\n");
 	printMatrix(matrix);
 
 	//create a new matrix with only two rows
@@ -40,9 +42,10 @@ int main(){
 	int resultMatrix[rows][cols];
 
 	//multiply matrix and matrix2  and append the result into matrixResult
-	multiplymatrix(matrix2, matrix, resultMatrix);
+	multiplyMatrix(matrix2, matrix, resultMatrix);
 
 	//print matrixResult to the screen
+	printf("\n The result from multiplying the matrix by matrix2 is:\n");
 	printMatrix(resultMatrix);
 
 	return 0;
@@ -63,12 +66,15 @@ void fillMatrix(int matrix[rows][cols]){
 }
 
 void printMatrix(int matrix[rows][cols]){
+	
+	printf("\n");
+
 	for (int i = 0; i < rows; i++){
-		printf(" [");
+		printf("[");
 		for (int k = 0; k < cols; k++){
-			printf("%d    ", matrix[i][k]);
+			printf("%10d", matrix[i][k]);
 		}
-		printf("]\n");
+		printf(" ]\n");
 	}
 }
 
@@ -92,19 +98,30 @@ void transposeMatrix(int matrix[rows][cols]){
 }
 
 void multiplyMatrix(int m1[2][cols], int m2[rows][cols], int resultMatrix[rows][cols]){
-	//the sums from the multiplication
-	int sum1 = 0;
-	int sum2 = 0;
 
+	//making sure all the values in the matrix is 0
 	for (int i = 0; i < rows; i++){
-		sum1 = 0;
-		sum2 = 0;
-		for(int k = 0; k < cols; k++){
-			sum1 += (m1[0][k] * m2[k][i]);
-			sum2 += (m1[1][k] * m2[k][i]);
+		for (int k = 0; k < cols; k++){
+			resultMatrix[i][k] = 0;
 		}
-		resultMatrix[0][i] = sum1;
-		resultMatrix[1][i] = sum2;
+	}
+
+	//the sums from the multiplication
+	int sum;
+
+	for (int i = 0; i < 2; i++){
+		sum = 0;
+		for(int k = 0; k < cols; k++){
+			for (int j = 0; j < rows; j++){
+				sum += m1[i][j] * m2[j][k];
+			}
+			resultMatrix[i][k] = sum;
+			sum = 0;
+		}
 	}
 }
 
+
+//Things to do: 
+//Must fix the multiplyMatrix and make the last few rows print 0
+//convert transposeMatrix and printMatrix into pointer notation
