@@ -1,6 +1,5 @@
 #!/bin/bash
 
 clear
-gcc dllstructure.c
--o dllstructure.c
+gcc -o dllstructure dllstructure.c
 ./dllstructure
