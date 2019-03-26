@@ -11,7 +11,7 @@ void fillMatrix(int matrix[rows][cols]);
 //This function takes a 5x5 matrix as parameter and print each row of the matrix to the screen line by line.
 void printMatrix(int matrix[rows][cols]);
 
-//This function takes a x5 matrix as parameter and transpose it
+//This function takes a 5x5 matrix as parameter and transpose it
 void transposeMatrix(int matrix[rows][cols]);
 
 //This function takes 3 matrices as parameters and will calculate the product of the first two matrices and place the result into the third one.
