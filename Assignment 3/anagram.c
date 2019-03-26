@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Prototyping:
 void stringsort(char*);
 
 int main( int argc, char *argv[]){
@@ -58,9 +59,11 @@ void stringsort(char *s){
 	char *p;
 	char *r;
 	char ch;
-
+	
+	//gets the length of the string
 	len = strlen(s);
 
+	//let r have enough space for the string
 	r = (char*)malloc(len+1);
 
 	p = s;
@@ -75,6 +78,7 @@ void stringsort(char *s){
 		}
 		p = s;
 	}
+	
 	*(r+d) = '\0';
 	strcpy(s,r);
 	free(r);
