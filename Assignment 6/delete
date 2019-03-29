@@ -1,0 +1,52 @@
+void delete_record(const char* csv_filename, const char* name) {
+	FILE* f1 = fopen(csv_filename, "rt");
+	if (f1 == NULL) {
+		printf("File not found\n");
+		return;
+	}
+
+	FILE* f2 = fopen("temp", "wt");
+
+	char line[101];
+	fgets(line, sizeof(line), f1);
+
+	int match = 0;
+	int lines = 0;
+	char string[101];
+
+	printf("\nSearching for name in file...\n");
+	while (fgets(line, 101, f1) != NULL) {
+		strcpy(string, line);
+		lines++;
+		if (strcmp(strtok(line, ", "), name) == 0) {
+			match = 1;
+			break;
+		}
+	}
+
+	if (!match) {
+		printf("Name is not found\n");
+	}
+
+	char ch = 'A';
+	int temp = 1;
+
+	while (ch != EOF) {
+		ch = getc(f1);
+		if (temp != lines) {
+			putc(ch, f2);
+		}
+		if (ch == '\n') {
+			temp++;
+		}
+	}
+
+	fclose(f1);
+	fclose(f2);
+
+	remove(csv_filename);
+
+	rename("temp", csv_filename);
+	printf("\n Contents are now modified");
+
+}
