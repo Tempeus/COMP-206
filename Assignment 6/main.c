@@ -20,7 +20,7 @@ void delete_record(const char* csv_filename, const char* name);
 
 int main(){
 	/* Question 1 */
-	load_and_convert("INFO.txt");
+	load_and_convert("input.txt");
 	
 	/* Question 2 */
 	read_csv("output.csv");
@@ -36,8 +36,8 @@ int main(){
 	read_csv("output.csv");
 
 	/* Question 3.3 */
-	//delete_record("output.csv", "Maria");
-	//read_csv("output.csv"); //To print to the screen
+	delete_record("output.csv", "Maria");
+	read_csv("output.csv"); //To print to the screen
 
 
 	return 0;
@@ -75,7 +75,7 @@ void find_name(const char* csv_filename, const char* name){
 	}
 
 	fclose(f);
-}
+} 
 
 void add_record(const char* csv_filename, const char* name, const int age, const char* city){
 	FILE* f = fopen(csv_filename, "at");
@@ -90,6 +90,38 @@ void add_record(const char* csv_filename, const char* name, const int age, const
 }
 
 void delete_record(const char* csv_filename, const char* name){
-	FILE* f = fopen(csv_filename, "rt");
+	FILE* f1 = fopen(csv_filename, "rt");
+	if (f1 == NULL){
+		printf("File not found\n");
+		return;
+	}
+
+	FILE* f2 = fopen("temp", "wt");
+
+	char line[101];
+
+	int match = 0;
+	char string[101];
+	char ch = 'A';
+
+	//Printing all lines except for the deleted one
+	printf("\nSearching for name in file...\n");
+	while (fgets(line,101, f1) != NULL){
+		strcpy(string, line);
+		if (strcmp(strtok(line, ", "), name) == 0 && match == 0){
+			match = 1;
+		}
+		else{
+			fprintf(f2,"%s",string);
+		}
+	}
+
+	fclose(f1);
+	fclose(f2);
+
+	remove(csv_filename);
 	
+	//renaming the new file to the csv filename
+	rename("temp", csv_filename);
+	printf("\nContents are now modified");
 }
