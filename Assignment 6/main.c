@@ -90,5 +90,6 @@ void add_record(const char* csv_filename, const char* name, const int age, const
 }
 
 void delete_record(const char* csv_filename, const char* name){
-
+	FILE* f = fopen(csv_filename, "rt");
+	
 }
